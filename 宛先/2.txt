@@ -1,8 +1,8 @@
 mail.to
-************@toshiba.co.jp;************@toshiba.co.jp;************@toshiba.co.jp;************@toshiba.co.jp;************@toshiba.co.jp
+************@******.com;************@******.com;************@******.com
 
 mail.cc
-************@toshiba.co.jp;************@toshiba.co.jp
+************@******.com;************@******.com
 
 mail.bcc
-capibaratotoro@gmail.com;
+************@******.com
