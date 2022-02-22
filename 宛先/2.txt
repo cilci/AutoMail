@@ -1,0 +1,8 @@
+mail.to
+************@toshiba.co.jp;************@toshiba.co.jp;************@toshiba.co.jp;************@toshiba.co.jp;************@toshiba.co.jp
+
+mail.cc
+************@toshiba.co.jp;************@toshiba.co.jp
+
+mail.bcc
+capibaratotoro@gmail.com;
