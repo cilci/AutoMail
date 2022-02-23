@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 import datetime
 import calendar
+import re
 week = ["月","火","水","木","金","土","日"]
 
 #魔法の言葉で、Outlookを使える状態に
@@ -36,9 +37,9 @@ def read_subject(txt):
     with open(txt, encoding="utf-8") as f:
         subject = f.read() #宛先読み込み
     dt_now = datetime.datetime.now()
+    subject = re.sub(r'TODAY', dt_now.strftime(' %Y/%m/%d')+"（"+week[dt_now.weekday()]+"）", subject)
     mail_subject.delete('1.0', 'end')
     mail_subject.insert('1.0', subject)
-    mail_subject.insert('end+1c', dt_now.strftime(' %Y/%m/%d')+"（"+week[dt_now.weekday()]+"）")
 
 def read_body(txt):
     with open(txt, encoding="utf-8") as f:
