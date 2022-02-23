@@ -103,6 +103,9 @@ read_body("本文/1.txt")
 ##########作成ボタン##########
 make_button = ttk.Button(root, text="作成", command = make_mail)
 
+##########閉じるボタン##########
+close_button = ttk.Button(root, text="閉じる", command = root.quit)
+
 ##########ウィジェット配置##########
 combobox.pack(expand=0, padx=3, pady=3)
 
@@ -120,7 +123,7 @@ label_body.pack(fill="x", expand=0, padx=3, pady=3)
 mail_body.pack(fill="both", expand=True, padx=3, pady=3)
 
 make_button.pack(expand=0, padx=3, pady=3)
-
+close_button.pack(expand=0, padx=3, pady=3)
 root.mainloop()
 
 
