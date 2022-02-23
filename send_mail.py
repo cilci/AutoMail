@@ -6,7 +6,7 @@ import calendar
 import re
 week = ["月","火","水","木","金","土","日"]
 
-#魔法の言葉で、Outlookを使える状態に
+#Outlookを使える状態に
 outlook = win32com.client.Dispatch("Outlook.Application")
 
 
@@ -18,7 +18,6 @@ root.title("メール作成")
 ##########関数作成#################################################
 #コンボボックスの選択値をゲット
 def get_combo(event):
-    print(combobox.current())
     read_to("宛先/"+str(combobox.current()+1)+".txt")
     read_subject("件名/"+str(combobox.current()+1)+".txt")
     read_body("本文/"+str(combobox.current()+1)+".txt")
@@ -64,6 +63,29 @@ def make_mail():
     #メール確認
     mail.display(True)
 
+#メール送信チェック
+def send_check():
+    #if send_check_button.current():
+    if var.get():
+        send_button['state'] = "normal"
+    else:
+        send_button['state'] = "disabled"
+
+#メール送信
+def send_mail():
+    #instance生成(メール)
+    mail = outlook.CreateItem(0)
+    mail.bodyFormat = 1
+    #送信先
+    mail.to = mail_to.get('1.0', 'end -1c')
+    mail.cc = mail_cc.get('1.0', 'end -1c')
+    mail.bcc = mail_bcc.get('1.0', 'end -1c')
+    #件名
+    mail.subject = mail_subject.get('1.0', 'end -1c')
+    #本文
+    mail.body = mail_body.get('1.0', 'end -1c')
+    #メール確認
+    mail.Send()
     #root.quit()
 ###################################################################
 
@@ -102,7 +124,12 @@ read_body("本文/1.txt")
 
 ##########作成ボタン##########
 make_button = ttk.Button(root, text="作成", command = make_mail)
-
+##########送信チェックボタン##########
+var = tk.BooleanVar()
+var.set(False) 
+send_check_button = tk.Checkbutton(root, text='そのまま送信する場合はチェック', command=send_check, variable = var)
+##########送信ボタン##########
+send_button = ttk.Button(root, text="送信", command = send_mail, state=tk.DISABLED)
 ##########閉じるボタン##########
 close_button = ttk.Button(root, text="閉じる", command = root.quit)
 
@@ -123,32 +150,7 @@ label_body.pack(fill="x", expand=0, padx=3, pady=3)
 mail_body.pack(fill="both", expand=True, padx=3, pady=3)
 
 make_button.pack(expand=0, padx=3, pady=3)
+send_check_button.pack(expand=0, padx=3, pady=3)
+send_button.pack(expand=0, padx=3, pady=3)
 close_button.pack(expand=0, padx=3, pady=3)
 root.mainloop()
-
-
-"""
-#魔法の言葉で、Outlookを使える状態に
-outlook = win32com.client.Dispatch("Outlook.Application")
-
-#instance生成(メール)
-mail = outlook.CreateItem(0)
-
-#送信先
-mail.to = "************@gmail.com;"
-
-#件名
-mail.subject = "【自動送信】メールテスト"
-
-#MailFormat Text
-mail.bodyFormat = 1
-
-#Mail本文
-mail.body = "Hallow world!!"
-
-#メール内容確認    
-mail.display(True)
-
-#メール送信
-#mail.Send()
-"""
