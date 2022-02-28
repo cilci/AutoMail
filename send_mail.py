@@ -6,7 +6,7 @@ import calendar
 import re
 week = ["月","火","水","木","金","土","日"]
 
-#Outlookを使える状態に
+#魔法の言葉で、Outlookを使える状態に
 outlook = win32com.client.Dispatch("Outlook.Application")
 
 
@@ -51,7 +51,7 @@ def read_body(txt):
 def make_mail():
     #instance生成(メール)
     mail = outlook.CreateItem(0)
-    mail.bodyFormat = 1
+    mail.bodyFormat = 3
     #送信先
     mail.to = mail_to.get('1.0', 'end -1c')
     mail.cc = mail_cc.get('1.0', 'end -1c')
@@ -62,6 +62,7 @@ def make_mail():
     mail.body = mail_body.get('1.0', 'end -1c')
     #メール確認
     mail.display(True)
+    root.quit()
 
 #メール送信チェック
 def send_check():
@@ -96,7 +97,7 @@ style.configure("office.TCombobox", selectbackground="blue", fieldbackground="re
 
 
 ##########メニュー##########
-with open("menu.txt", encoding="utf-8") as f:
+with open("メニュー.txt", encoding="utf-8") as f:
         menus = f.readlines() #メニュー読み込み
 v = tk.StringVar()
 combobox = ttk.Combobox(root, textvariable= v, values = menus, height=1)
@@ -105,11 +106,11 @@ combobox.set(menus[0])
 
 ##########宛先##########
 label_to = ttk.Label(root, text="To：")
-mail_to = tk.Text(root, height=2)
+mail_to = tk.Text(root, height=1)
 label_cc = ttk.Label(root, text="Cc：")
-mail_cc = tk.Text(root, height=2)
+mail_cc = tk.Text(root, height=1)
 label_bcc = ttk.Label(root, text="Bcc：")
-mail_bcc = tk.Text(root, height=2)
+mail_bcc = tk.Text(root, height=1)
 read_to("宛先/1.txt")
 
 ##########件名##########
@@ -119,7 +120,7 @@ read_subject("件名/1.txt")
 
 ##########本文##########
 label_body = ttk.Label(root, text="本文：")
-mail_body = tk.Text(root, height=30, width=100)
+mail_body = tk.Text(root, height=15)
 read_body("本文/1.txt")
 
 ##########作成ボタン##########
