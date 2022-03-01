@@ -68,7 +68,6 @@ def make_mail():
     mail.body = mail_body.get('1.0', 'end -1c')
     #メール確認
     mail.display(True)
-    root.quit()
 
 #メール送信チェック
 def send_check():
