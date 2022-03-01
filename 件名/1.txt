@@ -1,1 +1,1 @@
-StatusUpdate TODAY
+StatusUpdate（YYYY/MM/DD）
