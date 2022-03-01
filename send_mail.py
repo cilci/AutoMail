@@ -36,8 +36,14 @@ def read_subject(txt):
     with open(txt, encoding="utf-8") as f:
         subject = f.read() #宛先読み込み
     dt_now = datetime.datetime.now()
-    if("TODAY" in subject):
-        subject = re.sub(r'TODAY', dt_now.strftime(' %Y/%m/%d')+"（"+week[dt_now.weekday()]+"）", subject)
+    if("YYYY" in subject):
+        subject = re.sub(r'YYYY', dt_now.strftime('%Y'), subject)
+    if("MM" in subject):
+        subject = re.sub(r'MM', dt_now.strftime('%m'), subject)
+    if("DD" in subject):
+        subject = re.sub(r'DD', dt_now.strftime('%d'), subject)
+    if("AAA" in subject):
+        subject = re.sub(r'AAA', week[dt_now.weekday()], subject)
     mail_subject.delete('1.0', 'end')
     mail_subject.insert('1.0', subject)
 
